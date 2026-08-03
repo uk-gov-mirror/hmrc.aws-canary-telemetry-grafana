@@ -1,32 +1,45 @@
-[tool.poetry]
+[project]
 name = "aws-canary-telemetry-grafana"
 version = "0.1.0"
 description = "Canary service to test availability of Grafana"
-authors = ["Team Telemetry <telemetry@digital.hmrc.gov.uk>"]
-license = "Apache 2.0"
+authors = [{ name = "Team Telemetry", email = "telemetry@digital.hmrc.gov.uk" }]
+requires-python = ">=3.9,<4"
 readme = "README.md"
+license = "Apache 2.0"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+]
+dependencies = ["aws-lambda-powertools>=3.0.0,<4"]
 
-[[tool.poetry.source]]
+[dependency-groups]
+dev = [
+    "bandit",
+    "black",
+    "flake8",
+    "pre-commit",
+    "pytest",
+    "pytest-cov",
+    "toml",
+    "version-incrementor>=1.5.0,<2",
+    "wheel",
+    "cookiecutter",
+    "cruft",
+]
+
+[tool.uv]
+default-groups = "all"
+
+[[tool.uv.index]]
 name = "artifactory"
 url = "https://artefacts.tax.service.gov.uk/artifactory/api/pypi/pips/simple/"
-
-[tool.poetry.dependencies]
-python = "^3.9"
-aws-lambda-powertools = "^3.0.0"
-
-[tool.poetry.group.dev.dependencies]
-bandit = "*"
-black = "*"
-flake8 = "*"
-pre-commit = "*"
-pytest = "*"
-pytest-cov = "*"
-toml = "*"
-version-incrementor = "^1.5.0"
-wheel = "*"
-cookiecutter = "*"
-cruft = "*"
+default = true
 
 [build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+requires = ["uv_build>=0.12.1,<0.13.0"]
+build-backend = "uv_build"
