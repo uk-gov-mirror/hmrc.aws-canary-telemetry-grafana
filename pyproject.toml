@@ -3,36 +3,68 @@ name = "aws-canary-telemetry-grafana"
 version = "0.1.0"
 description = "Canary service to test availability of Grafana"
 authors = [{ name = "Team Telemetry", email = "telemetry@digital.hmrc.gov.uk" }]
-requires-python = ">=3.9,<4"
-readme = "README.md"
 license = "Apache 2.0"
+maintainers = [{ name = "Team Telemetry", email = "telemetry@digital.hmrc.gov.uk" }]
+readme = "README.md"
+requires-python = ">=3.14,<4"
+
 classifiers = [
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.9",
-    "Programming Language :: Python :: 3.10",
-    "Programming Language :: Python :: 3.11",
-    "Programming Language :: Python :: 3.12",
-    "Programming Language :: Python :: 3.13",
     "Programming Language :: Python :: 3.14",
 ]
-dependencies = ["aws-lambda-powertools>=3.0.0,<4"]
+
+dependencies = [
+    "aws-lambda-powertools"
+]
 
 [dependency-groups]
 dev = [
     "bandit",
     "black",
-    "flake8",
     "pre-commit",
     "pytest",
     "pytest-cov",
+    "pytest-ruff",
     "toml",
     "version-incrementor>=1.5.0,<2",
     "wheel",
     "cookiecutter",
-    "cruft",
+    "boto3>=1.43.62",
+    "selenium>=4.46.0",
 ]
 
+[tool.coverage.html]
+directory = "output/htmlcov"
+
+[tool.coverage.run]
+source = ["./src"]
+
+[tool.coverage.report]
+fail_under = 70
+
+[tool.pytest.ini_options]
+log_cli = true
+log_cli_date_format = "%Y-%m-%d %H:%M:%S"
+log_cli_level = "INFO"
+log_date_format = "%Y-%m-%d %H:%M:%S"
+log_format = "%(asctime)s %(levelname)s %(message)s"
+log_level = "INFO"
+python_files = ["tests.py", "test_*.py", "*_tests.py", "*_test.py"]
+addopts = [
+    "--ruff",
+    "--cov=./src",
+    "--no-cov-on-fail",
+    "-p no:warnings"
+]
+
+[tool.ruff]
+line-length = 120
+
+[tool.ruff.lint]
+select = ["E", "W"]        # pycodestyle-equivalent checks
+
 [tool.uv]
+package = false
 default-groups = "all"
 
 [[tool.uv.index]]
