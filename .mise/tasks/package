@@ -3,6 +3,7 @@
 #MISE depends=["setup", "prepare-release"]
 
 PYTHON_VERSION=$(python --version | awk '{print $2}')
+PYTHON_VERSION_LIB=$(cut -d '.' -f 1,2 <<< "${PYTHON_VERSION}")
 
 uv export --format requirements.txt \
           --index-url "${PIP_INDEX_URL}" \
@@ -19,6 +20,7 @@ docker run --rm \
            --volume "${MISE_CONFIG_ROOT}:/data" \
            --workdir /data \
            --env PIP_INDEX_URL="${PIP_INDEX_URL}" \
+           --env PYTHON_VERSION_LIB="${PYTHON_VERSION_LIB}" \
            --env REQUIREMENTS_FILE="requirements.txt" \
            --env VENV_NAME="venv_package" \
            "${DOCKER_REPO}/python:${PYTHON_VERSION}-slim-bookworm" /data/bin/entrypoint.sh /data/bin/package.sh

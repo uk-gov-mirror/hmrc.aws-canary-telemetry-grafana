@@ -3,7 +3,7 @@
 set -eu
 
 mkdir -p build
-cd "./${VENV_NAME}/lib/python3.14/site-packages"
+cd "./${VENV_NAME}/lib/python${PYTHON_VERSION_LIB}/site-packages"
 zip -r "../../../../build/canary.zip" .
 cd -
 cd "./src"
