@@ -14,5 +14,5 @@ find "${MISE_CONFIG_ROOT}" -type d -name 'venv_package' -prune -exec echo "🧹 
 find "${MISE_CONFIG_ROOT}" -type d -name 'venv_shell' -prune -exec echo "🧹 Removing {}" \; -exec rm -rf '{}' +
 find "${MISE_CONFIG_ROOT}" -type d -name 'venv_test' -prune -exec echo "🧹 Removing {}" \; -exec rm -rf '{}' +
 find "${MISE_CONFIG_ROOT}" -type f -name 'requirements.txt' -delete
-find "${MISE_CONFIG_ROOT}" -type f -name 'requirements-test.txt' -delete
+find "${MISE_CONFIG_ROOT}" -type f -name 'requirements-tests.txt' -delete
 echo "😎 Done."
