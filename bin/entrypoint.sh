@@ -16,6 +16,6 @@ apt-get update && apt-get -y upgrade && apt-get install -y zip
 # Install requirements
 python -m venv "${VENV_NAME}"
 source "${VENV_NAME}/bin/activate"
-pip install --requirement "${REQUIREMENTS_FILE}"
+pip install --requirement "${REQUIREMENTS_FILE}" --index-url "${PIP_INDEX_URL}"
 
 exec "$@"
