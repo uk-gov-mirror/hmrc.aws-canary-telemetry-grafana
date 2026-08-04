@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 #MISE description="Setup virtualenv & dependencies using uv and set-up the git hook scripts"
 #MISE quiet=true
-#MISE env={ PIP_INDEX_URL = "https://artefacts.tax.service.gov.uk/artifactory/api/pypi/pips/simple", UV_DEFAULT_INDEX = "https://artefacts.tax.service.gov.uk/artifactory/api/pypi/pips/simple" }
 
 uv venv --allow-existing
 uv sync

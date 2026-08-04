@@ -8,7 +8,7 @@ VERSION=$(cat .version)
 export IMAGE_VERSION=${VERSION}
 
 uv export --format requirements.txt \
-          --index-url https://artefacts.tax.service.gov.uk/artifactory/api/pypi/pips/simple \
+          --index-url "${PIP_INDEX_URL}" \
           --no-annotate \
           --no-hashes \
           --no-header \
