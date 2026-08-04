@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+#MISE depends=["package"]
+#MISE description="Take all the necessary steps to build and publish both canary function's zip and checksum files"
+
+VERSION=$(cat .version)
+
+openssl dgst -sha256 -binary "${MISE_CONFIG_ROOT}/build/canary.zip" | openssl enc -base64 > "${MISE_CONFIG_ROOT}/build/canary.zip.base64sha256"
+
+aws s3 cp "${MISE_CONFIG_ROOT}/build/canary.zip" "${S3_ADDRESS}/${CANARY_NAME}.${VERSION}.zip" --acl=bucket-owner-full-control
+aws s3 cp "${MISE_CONFIG_ROOT}/build/canary.zip.base64sha256" "${S3_ADDRESS}/${CANARY_NAME}.${VERSION}.zip.base64sha256" --content-type text/plain --acl=bucket-owner-full-control
