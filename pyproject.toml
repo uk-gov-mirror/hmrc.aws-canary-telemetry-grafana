@@ -21,15 +21,14 @@ dependencies = [
 dev = [
     "bandit",
     "black",
+    "boto3",
     "pre-commit",
     "pytest",
     "pytest-cov",
     "pytest-ruff",
+    "selenium>=4.32.0,<4.33",
     "toml",
     "version-incrementor>=1.5.0,<2",
-    "wheel",
-    "boto3",
-    "selenium>=4.32.0,<4.33",
 ]
 
 [tool.coverage.html]
