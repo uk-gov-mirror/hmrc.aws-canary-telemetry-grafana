@@ -28,7 +28,6 @@ dev = [
     "toml",
     "version-incrementor>=1.5.0,<2",
     "wheel",
-    "cookiecutter",
     "boto3",
     "selenium>=4.32.0,<4.33",
 ]
