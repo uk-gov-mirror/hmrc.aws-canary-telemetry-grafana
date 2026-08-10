@@ -13,3 +13,4 @@ phases:
   build:
     commands:
       - mise run publish
+      - mise run cut-release

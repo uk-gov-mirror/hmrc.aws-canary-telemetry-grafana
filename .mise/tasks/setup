@@ -6,3 +6,4 @@ uv venv --allow-existing
 uv sync
 uv lock --check
 uv pip check
+pre-commit install
