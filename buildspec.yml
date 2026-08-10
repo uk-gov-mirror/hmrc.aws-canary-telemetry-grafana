@@ -2,6 +2,7 @@ version: 0.2
 env:
   shell: bash
   variables:
+    GIT_BRANCH: main # Ensure this is explicitly set so version incrementor can bump a major version
     MISE_DISABLE_TOOLS: uv # uv is already installed in the build container
 
 phases:
