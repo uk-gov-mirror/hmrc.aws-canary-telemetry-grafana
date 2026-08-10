@@ -1,6 +1,6 @@
 [project]
 name = "aws-canary-telemetry-grafana"
-version = "0.1.0"
+version = "1.0.0"
 description = "Canary service to test availability of Grafana"
 authors = [{ name = "Team Telemetry", email = "telemetry@digital.hmrc.gov.uk" }]
 license = "Apache 2.0"
@@ -22,13 +22,12 @@ dev = [
     "bandit",
     "black",
     "boto3",
-    "pre-commit",
     "pytest",
     "pytest-cov",
     "pytest-ruff",
     "selenium>=4.32.0,<4.33",
     "toml",
-    "version-incrementor>=1.5.0,<2",
+    "version-incrementor",
 ]
 
 [tool.coverage.html]
@@ -59,7 +58,7 @@ addopts = [
 line-length = 120
 
 [tool.ruff.lint]
-select = ["E", "W"]        # pycodestyle-equivalent checks
+select = ["E", "W"]
 
 [tool.uv]
 package = false
@@ -67,7 +66,7 @@ default-groups = "all"
 
 [[tool.uv.index]]
 name = "artifactory"
-url = "https://artefacts.tax.service.gov.uk/artifactory/api/pypi/pips/simple/"
+url = "https://artefacts.tax.service.gov.uk/artifactory/api/pypi/pips/simple"
 default = true
 
 [build-system]

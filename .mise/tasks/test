@@ -4,8 +4,6 @@
 #MISE raw=true
 
 PYTHON_VERSION=$(python --version | awk '{print $2}')
-VERSION=$(cat .version)
-export IMAGE_VERSION=${VERSION}
 
 uv export --format requirements.txt \
           --index-url "${PIP_INDEX_URL}" \

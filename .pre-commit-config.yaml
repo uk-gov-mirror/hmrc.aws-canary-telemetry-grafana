@@ -24,6 +24,13 @@ repos:
       - id: end-of-file-fixer
         name: Fix missing end-of-file line returns
         exclude: repository.yaml|tests/unit/test-data/
+  - repo: https://github.com/thlorenz/doctoc
+    rev: v2.5.0
+    hooks:
+      - id: doctoc
+        name: Update Table of Contents
+        args:
+          - --update-only
   - repo: https://github.com/asottile/reorder_python_imports
     rev: v3.17.0
     hooks:
