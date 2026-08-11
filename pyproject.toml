@@ -6,7 +6,7 @@ authors = [{ name = "Team Telemetry", email = "telemetry@digital.hmrc.gov.uk" }]
 license = "Apache 2.0"
 maintainers = [{ name = "Team Telemetry", email = "telemetry@digital.hmrc.gov.uk" }]
 readme = "README.md"
-requires-python = ">=3.12,<3.13"
+requires-python = "==3.12.13"
 
 classifiers = [
     "Programming Language :: Python :: 3",
