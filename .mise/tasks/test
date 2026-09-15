@@ -13,12 +13,17 @@ uv export --format requirements.txt \
           --output-file "requirements-tests.txt" \
           --quiet
 
+docker build \
+           --platform 'linux/amd64' \
+           --build-arg DOCKER_REPO="${DOCKER_REPO}" \
+           --build-arg PYTHON_VERSION="${PYTHON_VERSION}" \
+           --build-arg PIP_INDEX_URL="${PIP_INDEX_URL}" \
+           --build-arg REQUIREMENTS_FILE="requirements-tests.txt" \
+           -t aws-canary-telemetry-grafana-test \
+           .
+
 docker run --rm \
            --tty \
            --platform 'linux/amd64' \
            --volume "${MISE_CONFIG_ROOT}:/data" \
-           --workdir /data \
-           --env PIP_INDEX_URL="${PIP_INDEX_URL}" \
-           --env REQUIREMENTS_FILE="requirements-tests.txt" \
-           --env VENV_NAME="venv_test" \
-           "${DOCKER_REPO}/python:${PYTHON_VERSION}-slim-bookworm" /data/bin/entrypoint.sh /data/bin/test.sh
+           aws-canary-telemetry-grafana-test /data/bin/test.sh
