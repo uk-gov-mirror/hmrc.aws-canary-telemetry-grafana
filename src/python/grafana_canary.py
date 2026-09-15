@@ -18,6 +18,7 @@ GRAFANA_USERNAME = user_response.get("Parameter").get("Value")
 GRAFANA_PASSWORD = password_response.get("Parameter").get("Value")
 GRAFANA_URL = os.getenv("GRAFANA_URL")
 GRAFANA_DASHBOARD_URL = os.getenv("GRAFANA_DASHBOARD_URL")
+GRAFANA_DASHBOARD_URL_ALERT_SIM = os.getenv("GRAFANA_DASHBOARD_URL_ALERT_SIM")
 SCREENSHOT_ON_STEP_START = bool(
     literal_eval(os.getenv("SCREENSHOT_ON_STEP_START", "False"))
 )
@@ -39,6 +40,9 @@ async def main():
 
     selector_login_button = "//button[normalize-space()='Log in']"
     selector_login_name = "//*[@placeholder='email or username']"
+    selector_find_broken_panels = (
+        "//button[@data-testid='data-testid Panel status error']"
+    )
     selector_login_password = (
         "//*[@id='current-password' or @name='password']"  # nosec B105
     )
@@ -88,6 +92,18 @@ async def main():
         browser.find_element(By.CLASS_NAME, "main-view")
 
     await syn_webdriver.execute_step("click", customer_actions_4)
+
+    def customer_actions_5():
+        logger.debug("Checking for broken panels...")
+        browser.get(GRAFANA_DASHBOARD_URL_ALERT_SIM)
+        broken_panels = browser.find_elements(By.XPATH, selector_find_broken_panels)
+        if len(broken_panels) > 0:
+            raise Exception(
+                f"Canary failed: Found {len(broken_panels)} broken panels on the dashboard."
+            )
+
+    await syn_webdriver.execute_step("checkBrokenPanels", customer_actions_5)
+
     logger.info("Canary successfully executed")
 
 
