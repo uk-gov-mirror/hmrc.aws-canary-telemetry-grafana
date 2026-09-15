@@ -64,6 +64,10 @@ async def main():
         browser.implicitly_wait(TIMEOUT_SECONDS)
         browser.get(url_to_dashboard)
 
+    def navigate_to_alert_sim_dashboard():
+        browser.implicitly_wait(TIMEOUT_SECONDS)
+        browser.get(GRAFANA_DASHBOARD_URL_ALERT_SIM)
+
     await syn_webdriver.execute_step("navigateToUrl", navigate_to_page)
 
     # Execute customer steps
@@ -92,10 +96,10 @@ async def main():
         browser.find_element(By.CLASS_NAME, "main-view")
 
     await syn_webdriver.execute_step("click", customer_actions_4)
+    await syn_webdriver.execute_step("navigateToUrl", navigate_to_alert_sim_dashboard)
 
     def customer_actions_5():
         logger.debug("Checking for broken panels...")
-        browser.get(GRAFANA_DASHBOARD_URL_ALERT_SIM)
         broken_panels = browser.find_elements(By.XPATH, selector_find_broken_panels)
         if len(broken_panels) > 0:
             raise Exception(

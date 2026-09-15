@@ -88,6 +88,7 @@ def test_main_drives_browser_through_expected_steps(monkeypatch):
         "redirection",
         "navigateToUrl",
         "click",
+        "navigateToUrl",
         "checkBrokenPanels",
     ]
     browser.get.assert_any_call(ENV["GRAFANA_URL"])
